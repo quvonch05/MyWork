@@ -76,40 +76,57 @@
         <nav class="fixed w-full z-50 glass transition-all duration-300 py-4" id="navbar">
             <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
                 <a href="#" class="text-2xl font-bold tracking-tighter text-white cursor-pointer" onclick="scrollToTop(event)">QB<span class="text-accent">.</span></a>
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#home" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Home</a>
-                    <a href="#about" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
-                    <a href="#skills" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Skills</a>
-                    <a href="#projects" class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Projects</a>
-                    <a href="#contact" class="px-6 py-2.5 text-sm font-medium rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-all hover:shadow-[0_0_15px_rgba(236,72,153,0.3)]">Contact Me</a>
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#home" class="text-sm font-medium text-gray-300 hover:text-white transition-colors" data-i18n="nav_home">Home</a>
+                    <a href="#about" class="text-sm font-medium text-gray-300 hover:text-white transition-colors" data-i18n="nav_about">About</a>
+                    <a href="#skills" class="text-sm font-medium text-gray-300 hover:text-white transition-colors" data-i18n="nav_skills">Skills</a>
+                    <a href="#projects" class="text-sm font-medium text-gray-300 hover:text-white transition-colors" data-i18n="nav_projects">Projects</a>
+                    <a href="#contact" class="px-5 py-2 text-sm font-medium rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-all hover:shadow-[0_0_15px_rgba(236,72,153,0.3)]" data-i18n="nav_contact">Contact Me</a>
+                    
+                    <!-- Language Switcher -->
+                    <div class="flex items-center gap-2 bg-dark/50 px-3 py-1.5 rounded-full border border-white/10 ml-2">
+                        <button class="lang-btn text-xs font-bold text-primary transition-colors" data-lang="uz" onclick="setLanguage('uz')">UZ</button>
+                        <span class="text-gray-600 text-xs">|</span>
+                        <button class="lang-btn text-xs text-gray-400 hover:text-white transition-colors" data-lang="ru" onclick="setLanguage('ru')">RU</button>
+                        <span class="text-gray-600 text-xs">|</span>
+                        <button class="lang-btn text-xs text-gray-400 hover:text-white transition-colors" data-lang="en" onclick="setLanguage('en')">EN</button>
+                    </div>
+                </div>
+                <!-- Mobile Nav Toggle -->
+                <div class="md:hidden flex items-center gap-4">
+                    <div class="flex items-center gap-2 bg-dark/50 px-2 py-1 rounded-full border border-white/10">
+                        <button class="lang-btn text-[10px] font-bold text-primary" data-lang="uz" onclick="setLanguage('uz')">UZ</button>
+                        <button class="lang-btn text-[10px] text-gray-400" data-lang="ru" onclick="setLanguage('ru')">RU</button>
+                        <button class="lang-btn text-[10px] text-gray-400" data-lang="en" onclick="setLanguage('en')">EN</button>
+                    </div>
                 </div>
             </div>
         </nav>
 
-        <!-- Figma/Motion Style Hero Section -->
+        <!-- Hero Section -->
         <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
             <div class="absolute top-1/4 left-1/4 w-[30rem] h-[30rem] bg-primary/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob"></div>
             <div class="absolute top-1/3 right-1/4 w-[25rem] h-[25rem] bg-secondary/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob" style="animation-delay: 2s;"></div>
             
             <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 w-full">
                 <div class="text-center lg:text-left">
-                    <div class="inline-block px-4 py-1.5 rounded-full glass border border-white/10 text-accent text-xs font-semibold tracking-wider uppercase mb-6 animate-fade-in-up">
-                        <span class="inline-block w-2 h-2 rounded-full bg-accent mr-2 animate-pulse"></span> Available for work
+                    <div class="inline-flex items-center px-4 py-1.5 rounded-full glass border border-white/10 text-accent text-xs font-semibold tracking-wider uppercase mb-6 animate-fade-in-up">
+                        <span class="inline-block w-2 h-2 rounded-full bg-accent mr-2 animate-pulse"></span> <span data-i18n="avail_work">Available for work</span>
                     </div>
-                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tighter leading-tight animate-fade-in-up" style="animation-delay: 0.1s;">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tighter leading-tight animate-fade-in-up" style="animation-delay: 0.1s;" data-i18n="hero_title">
                         Creative <br/>
                         <span class="text-gradient">Developer</span>
                     </h1>
-                    <p class="text-lg text-gray-400 max-w-xl mx-auto lg:mx-0 mb-8 animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <p class="text-lg text-gray-400 max-w-xl mx-auto lg:mx-0 mb-8 animate-fade-in-up" style="animation-delay: 0.2s;" data-i18n="hero_desc">
                         Hi, I'm Quvonchbek. I blend modern design with robust engineering to create digital products that feel like magic.
                     </p>
                     <div class="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4 animate-fade-in-up" style="animation-delay: 0.3s;">
-                        <a href="#projects" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition-colors duration-300 text-center">View Projects</a>
-                        <a href="#contact" class="w-full sm:w-auto px-8 py-3.5 rounded-full glass text-white font-medium hover:bg-white/10 transition-colors duration-300 text-center border border-white/10">Contact Me</a>
+                        <a href="#projects" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition-colors duration-300 text-center" data-i18n="btn_projects">View Projects</a>
+                        <a href="#contact" class="w-full sm:w-auto px-8 py-3.5 rounded-full glass text-white font-medium hover:bg-white/10 transition-colors duration-300 text-center border border-white/10" data-i18n="btn_contact">Contact Me <i class="fas fa-arrow-right ml-2 text-sm"></i></a>
                     </div>
                 </div>
 
-                <!-- Yangilangan Motion Floating Elements -->
+                <!-- Motion Floating Elements (6 Texnologiya) -->
                 <div class="hidden lg:block relative h-[500px] w-full animate-fade-in-up" style="animation-delay: 0.4s;">
                     <!-- Main Card -->
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 glass-panel p-6 rounded-3xl border border-white/20 shadow-[0_0_40px_rgba(59,130,246,0.15)] animate-float z-20">
@@ -175,21 +192,21 @@
         <section id="about" class="py-24 relative z-10 border-t border-white/5 bg-gradient-to-b from-transparent to-white/[0.02]">
             <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-16 items-center">
                 <div class="w-full md:w-1/2 reveal">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Men <span class="text-gradient">Haqimda</span></h2>
-                    <p class="text-gray-400 mb-6 leading-relaxed text-lg">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6" data-i18n="about_title">Men <span class="text-gradient">Haqimda</span></h2>
+                    <p class="text-gray-400 mb-6 leading-relaxed text-lg" data-i18n="about_p1">
                         Men Quvonchbek Baratov, Guliston Davlat Universiteti (GulDU) talabasiman. Axborot tizimlari va texnologiyalari yo'nalishida tahsil olaman. 
                     </p>
-                    <p class="text-gray-400 mb-8 leading-relaxed">
+                    <p class="text-gray-400 mb-8 leading-relaxed" data-i18n="about_p2">
                         Zamonaviy, tezkor va foydalanuvchiga qulay bo'lgan web va mobil ilovalar yaratishga ixtisoslashganman. Eng so'nggi texnologiyalardan foydalanib, kiberxavfsizlik va yuksak unumdorlikka asoslangan loyihalar qilib kelmoqdaman.
                     </p>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="glass p-5 rounded-2xl border border-white/5">
                             <h4 class="text-3xl font-bold text-white mb-1 text-primary">1+</h4>
-                            <p class="text-sm text-gray-500 font-medium">Yillik Tajriba</p>
+                            <p class="text-sm text-gray-500 font-medium" data-i18n="stat_exp">Yillik Tajriba</p>
                         </div>
                         <div class="glass p-5 rounded-2xl border border-white/5">
                             <h4 class="text-3xl font-bold text-white mb-1 text-accent">10+</h4>
-                            <p class="text-sm text-gray-500 font-medium">Yakunlangan Loyihalar</p>
+                            <p class="text-sm text-gray-500 font-medium" data-i18n="stat_proj">Yakunlangan Loyihalar</p>
                         </div>
                     </div>
                 </div>
@@ -206,7 +223,7 @@
         <!-- Skills Section -->
         <section id="skills" class="py-24 relative z-10 border-y border-white/5 overflow-hidden">
             <div class="max-w-7xl mx-auto px-6 text-center reveal">
-                <h2 class="text-3xl font-bold mb-12">Tech Stack</h2>
+                <h2 class="text-3xl font-bold mb-12" data-i18n="skills_title">Tech Stack</h2>
                 <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
                     <div class="glass p-6 rounded-2xl border border-white/5 hover:-translate-y-2 transition-all duration-300"><i class="fab fa-html5 text-4xl text-orange-500 mb-3"></i><div class="text-sm font-medium">HTML5</div></div>
                     <div class="glass p-6 rounded-2xl border border-white/5 hover:-translate-y-2 transition-all duration-300"><i class="fab fa-css3-alt text-4xl text-blue-500 mb-3"></i><div class="text-sm font-medium">CSS3</div></div>
@@ -221,14 +238,9 @@
         <!-- Projects -->
         <section id="projects" class="py-24 relative z-10">
             <div class="max-w-7xl mx-auto px-6">
-                <h2 class="text-3xl font-bold mb-12 reveal">My Projects</h2>
+                <h2 class="text-3xl font-bold mb-12 reveal" data-i18n="projects_title">My Projects</h2>
                 <div id="public-projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="glass p-6 rounded-3xl border border-white/10 animate-pulse">
-                        <div class="h-48 bg-white/5 rounded-2xl mb-4"></div>
-                        <div class="h-6 w-1/2 bg-white/5 rounded mb-3"></div>
-                        <div class="h-4 w-full bg-white/5 rounded mb-2"></div>
-                        <div class="h-4 w-2/3 bg-white/5 rounded"></div>
-                    </div>
+                    <!-- Skeleton loaded by JS -->
                 </div>
             </div>
         </section>
@@ -237,8 +249,8 @@
         <section id="contact" class="py-24 relative z-10 bg-gradient-to-b from-transparent to-white/[0.02] border-t border-white/5">
             <div class="max-w-4xl mx-auto px-6 reveal">
                 <div class="text-center mb-12">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-4">Let's <span class="text-gradient">Connect</span></h2>
-                    <p class="text-gray-400">Yangi loyihalar va hamkorlik uchun ochiqman. Menga xabar qoldiring!</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4" data-i18n="contact_title">Let's <span class="text-gradient">Connect</span></h2>
+                    <p class="text-gray-400" data-i18n="contact_desc">Yangi loyihalar va hamkorlik uchun ochiqman. Menga xabar qoldiring!</p>
                 </div>
                 
                 <form id="contact-form" class="glass p-8 md:p-10 rounded-[2.5rem] border border-white/10 flex flex-col gap-6 shadow-2xl relative overflow-hidden">
@@ -246,19 +258,19 @@
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
                         <div class="flex flex-col gap-2">
-                            <label class="text-sm text-gray-400 ml-2">Ismingiz</label>
-                            <input type="text" id="contact-name" required class="bg-dark/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-primary transition-colors" placeholder="John Doe">
+                            <label class="text-sm text-gray-400 ml-2" data-i18n="label_name">Ismingiz</label>
+                            <input type="text" id="contact-name" required data-i18n-placeholder="ph_name" class="bg-dark/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-primary transition-colors" placeholder="John Doe">
                         </div>
                         <div class="flex flex-col gap-2">
-                            <label class="text-sm text-gray-400 ml-2">Email manzilingiz</label>
-                            <input type="email" id="contact-email" required class="bg-dark/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-primary transition-colors" placeholder="john@example.com">
+                            <label class="text-sm text-gray-400 ml-2" data-i18n="label_email">Email manzilingiz</label>
+                            <input type="email" id="contact-email" required data-i18n-placeholder="ph_email" class="bg-dark/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-primary transition-colors" placeholder="john@example.com">
                         </div>
                     </div>
                     <div class="flex flex-col gap-2 relative z-10">
-                        <label class="text-sm text-gray-400 ml-2">Xabaringiz</label>
-                        <textarea id="contact-message" required rows="4" class="bg-dark/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-primary transition-colors resize-none" placeholder="Qanday yordam bera olaman?..."></textarea>
+                        <label class="text-sm text-gray-400 ml-2" data-i18n="label_message">Xabaringiz</label>
+                        <textarea id="contact-message" required rows="4" data-i18n-placeholder="ph_message" class="bg-dark/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-primary transition-colors resize-none" placeholder="Qanday yordam bera olaman?..."></textarea>
                     </div>
-                    <button type="submit" id="contact-submit-btn" class="mt-4 w-full md:w-auto md:self-end bg-white text-black font-bold py-4 px-10 rounded-2xl hover:bg-gray-200 transition-colors flex items-center justify-center gap-2 relative z-10">
+                    <button type="submit" id="contact-submit-btn" class="mt-4 w-full md:w-auto md:self-end bg-white text-black font-bold py-4 px-10 rounded-2xl hover:bg-gray-200 transition-colors flex items-center justify-center gap-2 relative z-10" data-i18n="btn_send">
                         <span>Xabar Yuborish</span> <i class="fas fa-paper-plane"></i>
                     </button>
                 </form>
@@ -268,8 +280,8 @@
         <!-- Footer -->
         <footer class="py-12 bg-darker text-center border-t border-white/5 relative z-10">
             <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-                <p class="text-sm text-gray-500">&copy; <span id="year"></span> Quvonchbek Baratov. Kiberxavfsizlik himoyasida.</p>
-                <button onclick="openAdminLogin()" class="px-5 py-2.5 rounded-full glass text-xs text-gray-400 hover:text-white border border-white/5 hover:border-white/20 transition-all flex items-center gap-2">
+                <p class="text-sm text-gray-500">&copy; <span id="year"></span> <span data-i18n="footer_text">Quvonchbek Baratov. Kiberxavfsizlik himoyasida.</span></p>
+                <button onclick="openAdminLogin()" class="px-5 py-2.5 rounded-full glass text-xs text-gray-400 hover:text-white border border-white/5 hover:border-white/20 transition-all flex items-center gap-2" data-i18n="admin_btn">
                     <i class="fas fa-lock"></i> Secure Admin Panel
                 </button>
             </div>
@@ -288,18 +300,20 @@
             <button id="chatbot-close" class="text-gray-400 hover:text-white transition-colors w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center"><i class="fas fa-times"></i></button>
         </div>
         <div id="chatbot-messages" class="flex-1 p-4 overflow-y-auto flex flex-col gap-3 text-sm scroll-smooth">
-            <div class="bg-white/10 text-white p-3 rounded-2xl rounded-tl-sm self-start max-w-[85%] border border-white/5">
+            <div class="bg-white/10 text-white p-3 rounded-2xl rounded-tl-sm self-start max-w-[85%] border border-white/5" data-i18n="chat_greeting">
                 Salom! Men Quvonchbekning AI yordamchisiman. U haqida qanday ma'lumot kerak?
             </div>
         </div>
         <div class="p-3 border-t border-white/10 flex gap-2 bg-dark/50">
-            <input type="text" id="chatbot-input" class="flex-1 bg-darker/50 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-primary text-sm" placeholder="Savol yozing...">
+            <input type="text" id="chatbot-input" data-i18n-placeholder="chat_input" class="flex-1 bg-darker/50 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-primary text-sm" placeholder="Savol yozing...">
             <button id="chatbot-send" class="bg-primary text-white w-10 h-10 rounded-xl hover:bg-primary/90 transition-colors flex items-center justify-center"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
 
 
-    <!-- ================= ADMIN SECURE LOGIN MODAL ================= -->
+    <!-- ================= QOLGAN MODAL VA ADMIN PANELLAR (Oldingidek) ================= -->
+    <!-- (Admin Panel xavfsizlik, dizayn, loyihalar qo'shish qismlari o'z o'rnida qoldi) -->
+    <!-- ADMIN SECURE LOGIN MODAL -->
     <div id="admin-login-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 backdrop-blur-xl p-4 opacity-0 transition-opacity duration-300">
         <div class="glass-panel p-10 rounded-[2.5rem] border border-white/10 w-full max-w-md relative transform scale-95 transition-transform duration-300 shadow-2xl" id="admin-login-box">
             <button onclick="closeAdminLogin()" class="absolute top-6 right-6 text-gray-500 hover:text-white w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center"><i class="fas fa-times"></i></button>
@@ -310,7 +324,6 @@
                 <h3 class="text-2xl font-bold">Secure Access</h3>
                 <p class="text-sm text-gray-400 mt-2">Faqat avtorizatsiyadan o'tgan adminlar uchun</p>
             </div>
-            
             <form id="admin-login-form" class="flex flex-col gap-4">
                 <div class="relative">
                     <i class="fas fa-envelope absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
@@ -327,8 +340,7 @@
         </div>
     </div>
 
-
-    <!-- ================= ADMIN DASHBOARD ================= -->
+    <!-- ADMIN DASHBOARD -->
     <div id="admin-dashboard-view" class="hidden min-h-screen flex-col bg-darker">
         <nav class="glass border-b border-white/5 py-4 sticky top-0 z-40">
             <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
@@ -342,7 +354,6 @@
                 </div>
             </div>
         </nav>
-
         <div class="flex-grow max-w-7xl mx-auto px-6 py-10 w-full flex flex-col md:flex-row gap-8">
             <!-- Sidebar -->
             <div class="w-full md:w-64 flex flex-col gap-2">
@@ -357,10 +368,8 @@
                     <i class="fas fa-cog"></i> Settings & Security
                 </button>
             </div>
-
             <!-- Content Area -->
             <div class="flex-grow">
-                
                 <!-- Projects Tab -->
                 <div id="admin-tab-projects" class="block animate-fade-in-up">
                     <div class="flex justify-between items-center mb-8">
@@ -384,7 +393,6 @@
                         </table>
                     </div>
                 </div>
-
                 <!-- Messages Tab -->
                 <div id="admin-tab-messages" class="hidden animate-fade-in-up">
                     <h2 class="text-2xl font-bold mb-8">Inbox Messages</h2>
@@ -392,11 +400,9 @@
                         <div class="text-center p-10 text-gray-500 glass rounded-3xl border border-white/5">Loading messages...</div>
                     </div>
                 </div>
-
                 <!-- Settings Tab -->
                 <div id="admin-tab-settings" class="hidden animate-fade-in-up">
                     <h2 class="text-2xl font-bold mb-8">Settings & Security</h2>
-                    
                     <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
                         <!-- Sayt va AI sozlamalari -->
                         <div class="glass p-8 rounded-3xl border border-white/5 flex flex-col gap-6 shadow-xl">
@@ -405,23 +411,19 @@
                                 <label class="text-sm text-gray-400 mb-2 block">To'g'ridan-to'g'ri qurilmadan yuklash</label>
                                 <input type="file" id="setting-img-file" accept="image/*" class="w-full text-sm text-gray-400 file:mr-4 file:py-3 file:px-5 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/20 file:text-primary hover:file:bg-primary/30 cursor-pointer transition-colors">
                             </div>
-
                             <h3 class="text-lg font-semibold text-white border-b border-white/10 pb-3 mt-4"><i class="fas fa-robot text-accent mr-2"></i> Chatbot AI Kaliti</h3>
                             <div>
                                 <label class="text-sm text-gray-400 mb-2 block">Google Gemini API Kaliti</label>
                                 <input type="password" id="setting-ai-key" placeholder="AI kalitini kiriting..." class="w-full bg-dark/50 border border-white/10 rounded-2xl px-5 py-4 text-white focus:outline-none focus:border-primary transition-colors">
                             </div>
-                            
                             <button onclick="saveGlobalSettings()" id="save-settings-btn" class="mt-2 bg-white text-black font-bold py-4 rounded-2xl hover:bg-gray-200 transition-colors">
                                 Saqlash va Yuklash
                             </button>
                         </div>
-
                         <!-- Parol o'zgartirish -->
                         <div class="glass p-8 rounded-3xl border border-red-500/20 bg-red-500/5 flex flex-col gap-6 relative overflow-hidden shadow-xl">
                             <div class="absolute -top-10 -right-10 p-6 text-red-500/10 text-9xl"><i class="fas fa-shield-alt"></i></div>
                             <h3 class="text-lg font-semibold text-white border-b border-red-500/20 pb-3 relative z-10"><i class="fas fa-key text-red-400 mr-2"></i> Parolni Yangilash</h3>
-                            
                             <form id="password-change-form" class="flex flex-col gap-5 relative z-10">
                                 <div>
                                     <label class="text-sm text-gray-400 mb-2 block">Hozirgi Parol</label>
@@ -442,13 +444,11 @@
         </div>
     </div>
 
-
-    <!-- ================= ADD PROJECT MODAL ================= -->
+    <!-- ADD PROJECT MODAL -->
     <div id="project-modal" class="fixed inset-0 z-[110] hidden items-center justify-center bg-black/90 backdrop-blur-xl p-4 opacity-0 transition-opacity duration-300">
         <div class="glass-panel p-8 md:p-10 rounded-[2.5rem] border border-white/10 w-full max-w-lg relative transform scale-95 transition-transform duration-300 shadow-2xl" id="project-modal-box">
             <button onclick="closeProjectModal()" class="absolute top-6 right-6 text-gray-500 hover:text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors"><i class="fas fa-times text-xl"></i></button>
             <h3 class="text-2xl font-bold mb-8">Add New Project</h3>
-            
             <form id="project-form" class="flex flex-col gap-5">
                 <input type="hidden" id="project-id">
                 <div>
@@ -471,13 +471,106 @@
         </div>
     </div>
 
-
-    <!-- Scripts & Firebase Integration -->
+    <!-- Scripts & Firebase Integration (Translation added) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithEmailAndPassword, signOut, onAuthStateChanged, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot, query, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
+
+        // ================= MULTILINGUAL (i18n) TIZIMI =================
+        const translations = {
+            uz: {
+                nav_home: "Bosh sahifa", nav_about: "Men haqimda", nav_skills: "Texnologiyalar", nav_projects: "Loyihalar", nav_contact: "Bog'lanish",
+                avail_work: "Ishlashga tayyorman",
+                hero_title: "Kreativ <br/><span class='text-gradient'>Dasturchi</span>",
+                hero_desc: "Salom, men Quvonchbekman. Men raqamli mahsulotlarni sehrli qilib yaratish uchun zamonaviy dizayn va kuchli dasturlashni birlashtiraman.",
+                btn_projects: "Loyihalarni ko'rish",
+                btn_contact: "Men bilan bog'lanish <i class='fas fa-arrow-right ml-2 text-sm'></i>",
+                about_title: "Men <span class='text-gradient'>Haqimda</span>",
+                about_p1: "Men Quvonchbek Baratov, Guliston Davlat Universiteti (GulDU) talabasiman. Axborot tizimlari va texnologiyalari yo'nalishida tahsil olaman.",
+                about_p2: "Zamonaviy, tezkor va foydalanuvchiga qulay bo'lgan web va mobil ilovalar yaratishga ixtisoslashganman. Eng so'nggi texnologiyalardan foydalanib, kiberxavfsizlik va yuksak unumdorlikka asoslangan loyihalar qilib kelmoqdaman.",
+                stat_exp: "Yillik Tajriba", stat_proj: "Yakunlangan Loyihalar",
+                skills_title: "Texnologiyalar", projects_title: "Mening <span class='text-gradient'>Loyihalarim</span>",
+                contact_title: "Bog'<span class='text-gradient'>lanish</span>", contact_desc: "Yangi loyihalar va hamkorlik uchun ochiqman. Menga xabar qoldiring!",
+                label_name: "Ismingiz", label_email: "Email manzilingiz", label_message: "Xabaringiz",
+                ph_name: "Ismingizni kiriting", ph_email: "email@misol.uz", ph_message: "Qanday yordam bera olaman?...",
+                btn_send: "<span>Xabar Yuborish</span> <i class='fas fa-paper-plane'></i>",
+                footer_text: "Quvonchbek Baratov. Kiberxavfsizlik himoyasida.",
+                admin_btn: "<i class='fas fa-lock'></i> Xavfsiz Admin Panel",
+                chat_greeting: "Salom! Men Quvonchbekning AI yordamchisiman. U haqida qanday ma'lumot kerak?",
+                chat_input: "Savol yozing..."
+            },
+            ru: {
+                nav_home: "Главная", nav_about: "Обо мне", nav_skills: "Навыки", nav_projects: "Проекты", nav_contact: "Контакты",
+                avail_work: "Открыт для работы",
+                hero_title: "Креативный <br/><span class='text-gradient'>Разработчик</span>",
+                hero_desc: "Привет, я Кувончбек. Я объединяю современный дизайн и мощное программирование для создания магических цифровых продуктов.",
+                btn_projects: "Смотреть проекты",
+                btn_contact: "Связаться со мной <i class='fas fa-arrow-right ml-2 text-sm'></i>",
+                about_title: "Обо <span class='text-gradient'>Мне</span>",
+                about_p1: "Я Кувончбек Баратов, студент Гулистанского Государственного Университета (ГулГУ). Изучаю информационные системы и технологии.",
+                about_p2: "Специализируюсь на создании современных, быстрых и удобных веб- и мобильных приложений. Используя новейшие технологии, я реализую проекты с упором на кибербезопасность и высокую производительность.",
+                stat_exp: "Год опыта", stat_proj: "Завершенных проектов",
+                skills_title: "Технологии", projects_title: "Мои <span class='text-gradient'>Проекты</span>",
+                contact_title: "Связа<span class='text-gradient'>ться</span>", contact_desc: "Открыт для новых проектов и сотрудничества. Оставьте мне сообщение!",
+                label_name: "Ваше имя", label_email: "Ваш Email", label_message: "Ваше сообщение",
+                ph_name: "Иван Иванов", ph_email: "ivan@example.ru", ph_message: "Чем я могу помочь?...",
+                btn_send: "<span>Отправить</span> <i class='fas fa-paper-plane'></i>",
+                footer_text: "Кувончбек Баратов. Под защитой кибербезопасности.",
+                admin_btn: "<i class='fas fa-lock'></i> Панель Админа",
+                chat_greeting: "Привет! Я ИИ-помощник Кувончбека. Какая информация вам нужна?",
+                chat_input: "Задайте вопрос..."
+            },
+            en: {
+                nav_home: "Home", nav_about: "About", nav_skills: "Skills", nav_projects: "Projects", nav_contact: "Contact",
+                avail_work: "Available for work",
+                hero_title: "Creative <br/><span class='text-gradient'>Developer</span>",
+                hero_desc: "Hi, I'm Quvonchbek. I blend modern design with robust engineering to create digital products that feel like magic.",
+                btn_projects: "View Projects",
+                btn_contact: "Contact Me <i class='fas fa-arrow-right ml-2 text-sm'></i>",
+                about_title: "About <span class='text-gradient'>Me</span>",
+                about_p1: "I'm Quvonchbek Baratov, a student at Guliston State University (GulSU). I study Information Systems and Technologies.",
+                about_p2: "I specialize in creating modern, fast, and user-friendly web and mobile applications. Using the latest technologies, I focus on cybersecurity and high-performance projects.",
+                stat_exp: "Year Experience", stat_proj: "Completed Projects",
+                skills_title: "Tech Stack", projects_title: "My <span class='text-gradient'>Projects</span>",
+                contact_title: "Let's <span class='text-gradient'>Connect</span>", contact_desc: "I'm open to new projects and collaborations. Leave me a message!",
+                label_name: "Your Name", label_email: "Your Email", label_message: "Your Message",
+                ph_name: "John Doe", ph_email: "john@example.com", ph_message: "How can I help you?...",
+                btn_send: "<span>Send Message</span> <i class='fas fa-paper-plane'></i>",
+                footer_text: "Quvonchbek Baratov. Secured by cybersecurity.",
+                admin_btn: "<i class='fas fa-lock'></i> Secure Admin",
+                chat_greeting: "Hi! I'm Quvonchbek's AI assistant. What would you like to know about him?",
+                chat_input: "Ask a question..."
+            }
+        };
+
+        window.setLanguage = (lang) => {
+            localStorage.setItem('portfolio_lang', lang);
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('text-primary', 'font-bold');
+                btn.classList.add('text-gray-400');
+                if(btn.dataset.lang === lang) {
+                    btn.classList.add('text-primary', 'font-bold');
+                    btn.classList.remove('text-gray-400');
+                }
+            });
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(translations[lang][key]) el.innerHTML = translations[lang][key];
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if(translations[lang][key]) el.placeholder = translations[lang][key];
+            });
+        };
+
+        const savedLang = localStorage.getItem('portfolio_lang') || 'uz';
+        setLanguage(savedLang);
+        // ===============================================================
 
         const appId = 'quvonchbek-portfolio';
         const firebaseConfig = {
@@ -510,7 +603,6 @@
             setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100%)'; setTimeout(() => toast.remove(), 300); }, 3000);
         }
 
-        // ================= Sozlamalar va Storage =================
         async function loadGlobalSettings() {
             try {
                 const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'settings', 'global');
@@ -568,11 +660,9 @@
             }
         };
 
-        // ================= Kiberxavfsizlik (Parol almashtirish) =================
         document.getElementById('password-change-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             if(!currentUser) return;
-
             const btn = document.getElementById('sec-change-btn');
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
             btn.disabled = true;
@@ -594,7 +684,6 @@
             }
         });
 
-        // ================= UI Mantiqlari =================
         window.openAdminLogin = () => {
             if(isCreator) { showAdminDashboard(); } else {
                 document.getElementById('admin-login-modal').classList.remove('hidden');
@@ -640,7 +729,6 @@
             document.getElementById(`tab-btn-${tab}`).className = 'text-left px-5 py-4 rounded-2xl bg-white/10 text-white font-medium transition-colors flex items-center gap-3';
         }
 
-        // ================= Auth va Bazaga Ulanish =================
         async function setupAuth() {
             onAuthStateChanged(auth, (user) => {
                 if (user && !user.isAnonymous) {
@@ -687,7 +775,6 @@
         const getProjectsRef = () => collection(db, 'artifacts', appId, 'public', 'data', 'projects');
         const getMessagesRef = () => collection(db, 'artifacts', appId, 'public', 'data', 'messages');
 
-        // ================= Loyihalar Qismi =================
         function listenToProjects() {
             if(!currentUser) return;
             onSnapshot(query(getProjectsRef()), (snapshot) => {
@@ -768,7 +855,6 @@
             try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'projects', id)); showToast("Deleted", "info"); } catch (e) {}
         }
 
-        // ================= Xabarlar Qismi (Contact & Admin) =================
         function listenToMessages() {
             if(!currentUser || !isCreator) return;
             onSnapshot(query(getMessagesRef()), (snapshot) => {
@@ -807,7 +893,7 @@
             } catch (error) { 
                 showToast("Xatolik yuz berdi", "error"); 
             } finally { 
-                btn.innerHTML = '<span>Xabar Yuborish</span> <i class="fas fa-paper-plane"></i>'; btn.disabled = false; 
+                btn.innerHTML = "<span>Xabar Yuborish</span> <i class='fas fa-paper-plane'></i>"; btn.disabled = false; 
             }
         });
 
@@ -839,8 +925,6 @@
         window.markMsgRead = async (id) => { if(isCreator) await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'messages', id), { read: true }); }
         window.deleteMsg = async (id) => { if(isCreator) await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'messages', id)); }
 
-
-        // ================= AI Chatbot =================
         const chatToggle = document.getElementById('chatbot-toggle');
         const chatWindow = document.getElementById('chatbot-window');
         const chatClose = document.getElementById('chatbot-close');
@@ -890,7 +974,8 @@
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${globalAiKey}`;
                 let contents = [...chatHistory, { role: "user", parts: [{ text }] }];
                 
-                const sysPrompt = `Siz Quvonchbek Baratov portfolisining AI yordamchisisiz. Quvonchbek - Web va Mobil dasturchi, GulDU Axborot tizimlari talabasi. Faqat shu haqida, qisqa (1-2 gap) va o'zbek tilida javob bering.`;
+                // Tilga qarab javob berishini sozlash (AI)
+                const sysPrompt = `Siz Quvonchbek Baratov portfolisining AI yordamchisisiz. Quvonchbek - Web va Mobil dasturchi, GulDU Axborot tizimlari talabasi. Faqat shu haqida, qisqa (1-2 gap) va foydalanuvchi qaysi tilda yozsa, o'sha tilda javob bering.`;
 
                 const response = await fetch(apiUrl, {
                     method: 'POST',
@@ -917,11 +1002,9 @@
         chatSend.addEventListener('click', handleChatSubmit);
         chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleChatSubmit(); });
 
-        // Init
         document.getElementById('year').textContent = new Date().getFullYear();
         setupAuth();
         
-        // Motion Reveal
         const revealElements = document.querySelectorAll('.reveal');
         const revealObserver = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); }); }, { threshold: 0.1 });
         revealElements.forEach(el => revealObserver.observe(el));
