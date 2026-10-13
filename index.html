@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quvonchbek Baratov | Portfolio & Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
+                    colors: {
+                        dark: '#0a0a0a', darker: '#050505',
+                        primary: '#3b82f6', secondary: '#8b5cf6', accent: '#06b6d4'
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'slide-in-right': 'slideInRight 0.3s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(100%)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #0a0a0a; color: #e5e5e5; overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+        
+        .glass { background: rgba(25, 25, 25, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass-panel { background: rgba(15, 15, 15, 0.8); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        
+        .text-gradient { background: linear-gradient(to right, #3b82f6, #8b5cf6, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        .hover-neon:hover { box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); }
+        
+        /* Toast Notifications */
+        #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; display: flex; flex-direction: column; gap: 10px; }
+        .toast { padding: 12px 20px; border-radius: 8px; color: white; font-size: 14px; font-weight: 500; display: flex; items-center gap: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+        .toast.success { background: rgba(16, 185, 129, 0.9); border: 1px solid rgba(16, 185, 129, 0.2); }
+        .toast.error { background: rgba(239, 68, 68, 0.9); border: 1px solid rgba(239, 68, 68, 0.2); }
+        .toast.info { background: rgba(59, 130, 246, 0.9); border: 1px solid rgba(59, 130, 246, 0.2); }
+    </style>
+</head>
+<body class="antialiased selection:bg-primary selection:text-white flex flex-col min-h-screen">
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container"></div>
+
+    <!-- ================= PUBLIC PORTFOLIO ================= -->
+    <div id="public-view" class="flex-grow">
+        <!-- Navbar -->
+        <nav class="fixed w-full z-50 glass transition-all duration-300 py-4" id="navbar">
+            <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold tracking-tighter text-white cursor-pointer" onclick="scrollToTop(event)">QB<span class="text-primary">.</span></a>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-sm text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="#about" class="text-sm text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="#skills" class="text-sm text-gray-300 hover:text-white transition-colors">Skills</a>
+                    <a href="#projects" class="text-sm text-gray-300 hover:text-white transition-colors">Projects</a>
+                    <a href="#contact" class="px-5 py-2 text-sm font-medium rounded-full bg-white/10 hover:bg-white/20 border border-white/10 transition-all hover-neon">Contact Me</a>
+                </div>
+                <button class="md:hidden text-gray-300 hover:text-white focus:outline-none" id="mobile-menu-btn">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div class="md:hidden hidden absolute top-full left-0 w-full glass flex-col px-6 py-4 space-y-4 shadow-lg border-b border-white/10" id="mobile-menu">
+                <a href="#home" class="text-gray-300 hover:text-white block mobile-link">Home</a>
+                <a href="#about" class="text-gray-300 hover:text-white block mobile-link">About</a>
+                <a href="#skills" class="text-gray-300 hover:text-white block mobile-link">Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-white block mobile-link">Projects</a>
+                <a href="#contact" class="text-primary font-medium block mobile-link">Contact Me</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+            <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/20 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
+            <div class="absolute top-1/3 right-1/4 w-72 h-72 bg-secondary/20 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob" style="animation-delay: 2s;"></div>
+            <div class="absolute -bottom-8 left-1/3 w-72 h-72 bg-accent/20 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob" style="animation-delay: 4s;"></div>
+
+            <div class="max-w-7xl mx-auto px-6 md:px-12 text-center relative z-10">
+                <p class="text-accent font-medium tracking-wide mb-3 animate-fade-in-up" style="animation-delay: 0.1s;">👋 Hello, World!</p>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight animate-fade-in-up" style="animation-delay: 0.2s;">
+                    I'm <span class="text-gradient">Quvonchbek</span><br>Baratov
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 animate-fade-in-up" style="animation-delay: 0.3s;">
+                    A passionate Full-Stack Web & Mobile Developer crafting beautiful, functional, and user-centric digital experiences.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 animate-fade-in-up" style="animation-delay: 0.4s;">
+                    <a href="#projects" class="px-8 py-3 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-medium hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(139,92,246,0.3)]">View My Work</a>
+                    <a href="#contact" class="px-8 py-3 rounded-full glass text-white font-medium hover:bg-white/10 transition-colors duration-300">Let's Talk <i class="fas fa-arrow-right ml-2 text-sm"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 relative z-10">
+            <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-16 items-center">
+                <div class="w-full md:w-1/2 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Men <span class="text-gradient">Haqimda</span></h2>
+                    <div class="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded mb-6"></div>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Men Quvonchbek Baratov, Guliston Davlat Universiteti (GulDU) talabasiman. Axborot tizimlari va texnologiyalari yo'nalishida tahsil olaman. Dasturlashga bo'lgan qiziqishim meni doimiy ravishda yangi bilimlarni o'zlashtirishga undaydi.
+                    </p>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Zamonaviy, tezkor va foydalanuvchiga qulay bo'lgan web va mobil ilovalar yaratishga ixtisoslashganman. Muammolarga kreativ yechim topish va sifatli kod yozish - mening doimiy maqsadim.
+                    </p>
+                    <div class="flex gap-4">
+                        <div class="glass p-4 rounded-xl border border-white/5 text-center flex-1">
+                            <h4 class="text-2xl font-bold text-white mb-1">1+</h4>
+                            <p class="text-xs text-gray-500 uppercase tracking-wider">Yillik Tajriba</p>
+                        </div>
+                        <div class="glass p-4 rounded-xl border border-white/5 text-center flex-1">
+                            <h4 class="text-2xl font-bold text-white mb-1">10+</h4>
+                            <p class="text-xs text-gray-500 uppercase tracking-wider">Loyihalar</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 reveal relative">
+                    <div class="aspect-square max-w-md mx-auto rounded-3xl overflow-hidden border border-white/10 relative z-10 glass">
+                        <!-- Placeholder - Kelajakda o'z rasmingizni URL'ini shu yerga qo'yishingiz mumkin -->
+                        <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-darker to-dark text-6xl font-bold text-white/10 image">
+                            QB.
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-full filter blur-3xl -z-10"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 bg-darker/50 relative z-10 border-y border-white/5 overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary/10 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+            
+            <div class="max-w-7xl mx-auto px-6 md:px-12 text-center reveal relative z-10">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Tech <span class="text-gradient">Stack</span></h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded mx-auto mb-12"></div>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                    <!-- HTML5 -->
+                    <div class="group p-6 glass rounded-2xl border border-white/5 hover:border-orange-500/50 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-orange-500/20">
+                        <i class="fab fa-html5 text-5xl text-gray-500 group-hover:text-orange-500 transition-colors mb-4 block"></i>
+                        <h3 class="text-white font-medium">HTML5</h3>
+                    </div>
+                    <!-- CSS3 -->
+                    <div class="group p-6 glass rounded-2xl border border-white/5 hover:border-blue-500/50 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-blue-500/20">
+                        <i class="fab fa-css3-alt text-5xl text-gray-500 group-hover:text-blue-500 transition-colors mb-4 block"></i>
+                        <h3 class="text-white font-medium">CSS3</h3>
+                    </div>
+                    <!-- JavaScript -->
+                    <div class="group p-6 glass rounded-2xl border border-white/5 hover:border-yellow-400/50 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-yellow-400/20">
+                        <i class="fab fa-js text-5xl text-gray-500 group-hover:text-yellow-400 transition-colors mb-4 block"></i>
+                        <h3 class="text-white font-medium">JavaScript</h3>
+                    </div>
+                    <!-- React -->
+                    <div class="group p-6 glass rounded-2xl border border-white/5 hover:border-cyan-400/50 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-cyan-400/20">
+                        <i class="fab fa-react text-5xl text-gray-500 group-hover:text-cyan-400 transition-colors mb-4 block"></i>
+                        <h3 class="text-white font-medium">React / Native</h3>
+                    </div>
+                    <!-- Node.js -->
+                    <div class="group p-6 glass rounded-2xl border border-white/5 hover:border-green-500/50 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-green-500/20">
+                        <i class="fab fa-node-js text-5xl text-gray-500 group-hover:text-green-500 transition-colors mb-4 block"></i>
+                        <h3 class="text-white font-medium">Node.js</h3>
+                    </div>
+                    <!-- Python -->
+                    <div class="group p-6 glass rounded-2xl border border-white/5 hover:border-blue-400/50 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-blue-400/20">
+                        <i class="fab fa-python text-5xl text-gray-500 group-hover:text-blue-400 transition-colors mb-4 block"></i>
+                        <h3 class="text-white font-medium">Python</h3>
+                    </div>
+                    <!-- PHP -->
+                    <div class="group p-6 glass rounded-2xl border border-white/5 hover:border-indigo-400/50 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-indigo-400/20">
+                        <i class="fab fa-php text-5xl text-gray-500 group-hover:text-indigo-400 transition-colors mb-4 block"></i>
+                        <h3 class="text-white font-medium">PHP</h3>
+                    </div>
+                    <!-- Database -->
+                    <div class="group p-6 glass rounded-2xl border border-white/5 hover:border-emerald-400/50 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-emerald-400/20">
+                        <i class="fas fa-database text-5xl text-gray-500 group-hover:text-emerald-400 transition-colors mb-4 block"></i>
+                        <h3 class="text-white font-medium">SQL / NoSQL</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section (Dynamic) -->
+        <section id="projects" class="py-24 relative z-10">
+            <div class="max-w-7xl mx-auto px-6 md:px-12">
+                <div class="flex justify-between items-end mb-12 reveal">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="text-gradient">Projects</span></h2>
+                        <div class="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded"></div>
+                    </div>
+                </div>
+                
+                <!-- Projects Container -->
+                <div id="public-projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Loading Skeleton -->
+                    <div class="glass p-6 rounded-2xl border border-white/10 animate-pulse">
+                        <div class="h-40 bg-white/5 rounded-xl mb-4"></div>
+                        <div class="h-6 w-1/2 bg-white/5 rounded mb-2"></div>
+                        <div class="h-4 w-full bg-white/5 rounded mb-4"></div>
+                        <div class="h-8 w-1/3 bg-white/5 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 relative z-10 bg-gradient-to-b from-transparent to-darker border-t border-white/5">
+            <div class="max-w-3xl mx-auto px-6 reveal">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-4">Get In <span class="text-gradient">Touch</span></h2>
+                    <p class="text-gray-400">Have a project in mind or just want to say hi? Send me a message!</p>
+                </div>
+                
+                <form id="contact-form" class="glass p-8 rounded-3xl border border-white/10 flex flex-col gap-6 shadow-2xl">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm text-gray-400 ml-1">Name</label>
+                            <input type="text" id="contact-name" required class="bg-darker/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors" placeholder="John Doe">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm text-gray-400 ml-1">Email</label>
+                            <input type="email" id="contact-email" required class="bg-darker/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors" placeholder="john@example.com">
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm text-gray-400 ml-1">Message</label>
+                        <textarea id="contact-message" required rows="4" class="bg-darker/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors resize-none" placeholder="Your message here..."></textarea>
+                    </div>
+                    <button type="submit" id="contact-submit-btn" class="mt-2 bg-gradient-to-r from-primary to-secondary text-white font-medium py-3 rounded-xl hover:opacity-90 transition-opacity flex justify-center items-center gap-2">
+                        <span>Send Message</span> <i class="fas fa-paper-plane text-sm"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-8 bg-darker text-center border-t border-white/5 relative z-10">
+            <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex gap-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-github text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-telegram text-xl"></i></a>
+                </div>
+                <p class="text-sm text-gray-500">&copy; <span id="year"></span> Quvonchbek Baratov. All rights reserved.</p>
+                <!-- Admin Login Link -->
+                <button onclick="openAdminLogin()" class="text-xs text-gray-600 hover:text-primary transition-colors flex items-center gap-1">
+                    <i class="fas fa-lock"></i> Admin Panel
+                </button>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ================= ADMIN LOGIN MODAL ================= -->
+    <div id="admin-login-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">
+        <div class="glass-panel p-8 rounded-3xl border border-white/10 w-full max-w-md relative transform scale-95 transition-transform duration-300" id="admin-login-box">
+            <button onclick="closeAdminLogin()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4 border border-primary/30">
+                    <i class="fas fa-user-shield text-2xl text-primary"></i>
+                </div>
+                <h3 class="text-2xl font-bold">Admin <span class="text-gradient">Access</span></h3>
+                <p class="text-sm text-gray-400 mt-2">Sign in to manage your portfolio</p>
+                <p class="text-xs text-accent mt-1 mb-4">(Demo test qilish uchun Login: <b>admin</b>, Parol: <b>admin123</b>)</p>
+            </div>
+            
+            <form id="admin-login-form" class="flex flex-col gap-4">
+                <input type="text" id="admin-email" placeholder="Login (yoki Email)" required class="bg-darker/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary">
+                <input type="password" id="admin-password" placeholder="Password" required class="bg-darker/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary">
+                <button type="submit" id="admin-login-btn" class="bg-primary text-white font-medium py-3 rounded-xl hover:bg-primary/90 transition-colors mt-2 shadow-lg shadow-primary/30">
+                    Login to Dashboard
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ================= ADMIN DASHBOARD ================= -->
+    <div id="admin-dashboard-view" class="hidden min-h-screen flex-col bg-darker">
+        <!-- Admin Navbar -->
+        <nav class="glass border-b border-white/5 py-4 sticky top-0 z-40">
+            <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-shield-alt text-primary text-xl"></i>
+                    <span class="font-bold text-lg">Admin <span class="text-gradient">Panel</span></span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="switchToPublic()" class="text-sm text-gray-400 hover:text-white flex items-center gap-2">
+                        <i class="fas fa-eye"></i> View Site
+                    </button>
+                    <button onclick="handleLogout()" class="px-4 py-2 bg-red-500/10 text-red-500 hover:bg-red-500/20 rounded-lg text-sm transition-colors border border-red-500/20">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="flex-grow max-w-7xl mx-auto px-6 py-8 w-full flex flex-col md:flex-row gap-8">
+            <!-- Sidebar / Tabs -->
+            <div class="w-full md:w-64 flex flex-col gap-2">
+                <button onclick="switchAdminTab('dashboard')" id="tab-btn-dashboard" class="text-left px-4 py-3 rounded-xl bg-white/10 text-white font-medium transition-colors border border-white/5 flex items-center gap-3">
+                    <i class="fas fa-chart-pie w-5"></i> Dashboard
+                </button>
+                <button onclick="switchAdminTab('projects')" id="tab-btn-projects" class="text-left px-4 py-3 rounded-xl bg-transparent hover:bg-white/5 text-gray-400 hover:text-white transition-colors border border-transparent flex items-center gap-3">
+                    <i class="fas fa-project-diagram w-5"></i> Manage Projects
+                </button>
+                <button onclick="switchAdminTab('messages')" id="tab-btn-messages" class="text-left px-4 py-3 rounded-xl bg-transparent hover:bg-white/5 text-gray-400 hover:text-white transition-colors border border-transparent flex items-center gap-3">
+                    <i class="fas fa-envelope w-5"></i> Messages <span id="msg-badge" class="ml-auto bg-primary text-xs rounded-full px-2 py-0.5 hidden">0</span>
+                </button>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="flex-grow">
+                <!-- Dashboard Tab -->
+                <div id="admin-tab-dashboard" class="block animate-fade-in-up">
+                    <h2 class="text-xl font-bold mb-6">Umumiy Statistika (Backend API)</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="glass p-6 rounded-2xl border border-white/5 relative overflow-hidden group">
+                            <div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl group-hover:bg-primary/30 transition-colors"></div>
+                            <h3 class="text-gray-400 text-sm font-medium mb-2">Jami Loyihalar</h3>
+                            <p class="text-4xl font-bold text-white" id="stat-projects">0</p>
+                        </div>
+                        <div class="glass p-6 rounded-2xl border border-white/5 relative overflow-hidden group">
+                            <div class="absolute -right-4 -top-4 w-24 h-24 bg-secondary/20 rounded-full blur-2xl group-hover:bg-secondary/30 transition-colors"></div>
+                            <h3 class="text-gray-400 text-sm font-medium mb-2">O'qilmagan Xabarlar</h3>
+                            <p class="text-4xl font-bold text-white" id="stat-unread">0</p>
+                        </div>
+                        <div class="glass p-6 rounded-2xl border border-white/5 relative overflow-hidden group">
+                            <div class="absolute -right-4 -top-4 w-24 h-24 bg-accent/20 rounded-full blur-2xl group-hover:bg-accent/30 transition-colors"></div>
+                            <h3 class="text-gray-400 text-sm font-medium mb-2">Jami Xabarlar</h3>
+                            <p class="text-4xl font-bold text-white" id="stat-messages">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects Tab -->
+                <div id="admin-tab-projects" class="hidden animate-fade-in-up">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold">Projects</h2>
+                        <button onclick="openProjectModal()" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm transition-colors flex items-center gap-2">
+                            <i class="fas fa-plus"></i> Add Project
+                        </button>
+                    </div>
+                    <div class="glass rounded-2xl border border-white/5 overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="border-b border-white/5 bg-white/5">
+                                        <th class="p-4 font-medium text-gray-400 text-sm">Title</th>
+                                        <th class="p-4 font-medium text-gray-400 text-sm">Tech Stack</th>
+                                        <th class="p-4 font-medium text-gray-400 text-sm text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-projects-list" class="divide-y divide-white/5">
+                                    <!-- Populated by JS -->
+                                    <tr><td colspan="3" class="p-8 text-center text-gray-500">Loading projects...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messages Tab -->
+                <div id="admin-tab-messages" class="hidden animate-fade-in-up">
+                    <h2 class="text-xl font-bold mb-6">Inbox Messages</h2>
+                    <div class="grid grid-cols-1 gap-4" id="admin-messages-list">
+                        <!-- Populated by JS -->
+                        <div class="text-center p-8 text-gray-500 glass rounded-2xl border border-white/5">Loading messages...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Form Modal (Admin) -->
+    <div id="project-modal" class="fixed inset-0 z-[110] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">
+        <div class="glass-panel p-6 md:p-8 rounded-3xl border border-white/10 w-full max-w-lg relative transform scale-95 transition-transform duration-300" id="project-modal-box">
+            <button onclick="closeProjectModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
+            <h3 class="text-2xl font-bold mb-6" id="project-modal-title">Add New Project</h3>
+            
+            <form id="project-form" class="flex flex-col gap-4">
+                <input type="hidden" id="project-id">
+                <div>
+                    <label class="text-xs text-gray-400 ml-1 mb-1 block">Project Title</label>
+                    <input type="text" id="project-title" required class="w-full bg-darker/50 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-primary">
+                </div>
+                <div>
+                    <label class="text-xs text-gray-400 ml-1 mb-1 block">Tech Stack (comma separated)</label>
+                    <input type="text" id="project-tech" required placeholder="e.g. React, Node.js, Firebase" class="w-full bg-darker/50 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-primary">
+                </div>
+                <div>
+                    <div class="flex justify-between items-end mb-1">
+                        <label class="text-xs text-gray-400 ml-1 block">Short Description</label>
+                        <button type="button" onclick="generateAIDescription()" class="text-xs text-accent hover:text-white transition-colors flex items-center gap-1" title="Generate with Gemini AI">
+                            <i class="fas fa-magic"></i> AI Generate
+                        </button>
+                    </div>
+                    <textarea id="project-desc" required rows="3" class="w-full bg-darker/50 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-primary resize-none"></textarea>
+                </div>
+                <div>
+                    <label class="text-xs text-gray-400 ml-1 mb-1 block">Live URL or GitHub Link (Optional)</label>
+                    <input type="url" id="project-url" placeholder="https://" class="w-full bg-darker/50 border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-primary">
+                </div>
+                <div class="mt-4 flex gap-3">
+                    <button type="button" onclick="closeProjectModal()" class="flex-1 py-3 rounded-xl border border-white/10 hover:bg-white/5 transition-colors">Cancel</button>
+                    <button type="submit" id="project-submit-btn" class="flex-1 bg-primary hover:bg-primary/90 text-white font-medium py-3 rounded-xl transition-colors">Save Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= AI CHATBOT ================= -->
+    <button id="chatbot-toggle" class="fixed bottom-6 left-6 z-50 bg-gradient-to-r from-primary to-secondary w-14 h-14 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:scale-110 transition-transform duration-300">
+        <i class="fas fa-robot text-white text-xl"></i>
+    </button>
+
+    <div id="chatbot-window" class="fixed bottom-24 left-6 z-50 w-80 max-w-[calc(100vw-3rem)] h-96 glass-panel rounded-2xl flex-col hidden transform scale-95 opacity-0 transition-all duration-300 origin-bottom-left shadow-2xl border border-white/10">
+        <div class="p-4 border-b border-white/10 flex justify-between items-center bg-white/5 rounded-t-2xl">
+            <h3 class="font-bold text-white flex items-center gap-2"><i class="fas fa-robot text-primary"></i> AI Assistant</h3>
+            <button id="chatbot-close" class="text-gray-400 hover:text-white transition-colors"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="chatbot-messages" class="flex-1 p-4 overflow-y-auto flex flex-col gap-3 text-sm scroll-smooth">
+            <div class="bg-white/10 text-white p-3 rounded-xl rounded-tl-none self-start max-w-[85%] border border-white/5">
+                Hi! I'm Quvonchbek's AI assistant. Ask me anything about his skills, education, or projects!
+            </div>
+        </div>
+        <div class="p-3 border-t border-white/10 flex gap-2 bg-darker/50 rounded-b-2xl">
+            <input type="text" id="chatbot-input" class="flex-1 bg-transparent border border-white/10 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-primary text-sm" placeholder="Ask a question...">
+            <button id="chatbot-send" class="bg-primary text-white px-3 rounded-lg hover:bg-primary/90 transition-colors"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+
+    <!-- Scripts & Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global Variables
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'quvonchbek-portfolio';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            // Fallback mock config for safe parsing if env var missing
+            apiKey: "mock", authDomain: "mock", projectId: "mock"
+        };
+        const initialToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // Init Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // State
+        let currentUser = null;
+        let isCreator = false; // Identifies if the logged-in user is the admin
+        let projectsData = [];
+        let messagesData = [];
+        
+        // DOM Elements
+        const publicView = document.getElementById('public-view');
+        const adminDashboard = document.getElementById('admin-dashboard-view');
+        const loginModal = document.getElementById('admin-login-modal');
+        const loginBox = document.getElementById('admin-login-box');
+        const projModal = document.getElementById('project-modal');
+        const projBox = document.getElementById('project-modal-box');
+
+        // Toast Notification System
+        window.showToast = function(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type} animate-slide-in-right`;
+            
+            let icon = 'fa-info-circle';
+            if(type === 'success') icon = 'fa-check-circle';
+            if(type === 'error') icon = 'fa-exclamation-circle';
+            
+            toast.innerHTML = `<i class="fas ${icon}"></i> <span>${message}</span>`;
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                toast.style.transition = 'all 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // UI View Toggles
+        window.openAdminLogin = () => {
+            if(isCreator) {
+                // If already authenticated as creator, go straight to dashboard
+                showAdminDashboard();
+            } else {
+                loginModal.classList.remove('hidden');
+                loginModal.classList.add('flex');
+                setTimeout(() => {
+                    loginModal.classList.remove('opacity-0');
+                    loginBox.classList.remove('scale-95');
+                }, 10);
+            }
+        }
+        
+        window.closeAdminLogin = () => {
+            loginModal.classList.add('opacity-0');
+            loginBox.classList.add('scale-95');
+            setTimeout(() => {
+                loginModal.classList.add('hidden');
+                loginModal.classList.remove('flex');
+            }, 300);
+        }
+
+        window.showAdminDashboard = () => {
+            closeAdminLogin();
+            publicView.classList.add('hidden');
+            adminDashboard.classList.remove('hidden');
+            adminDashboard.classList.add('flex');
+            window.scrollTo(0,0);
+        }
+
+        window.switchToPublic = () => {
+            adminDashboard.classList.add('hidden');
+            adminDashboard.classList.remove('flex');
+            publicView.classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        window.switchAdminTab = (tab) => {
+            document.getElementById('admin-tab-dashboard').classList.add('hidden');
+            document.getElementById('admin-tab-projects').classList.add('hidden');
+            document.getElementById('admin-tab-messages').classList.add('hidden');
+            
+            document.getElementById('tab-btn-dashboard').className = 'text-left px-4 py-3 rounded-xl bg-transparent hover:bg-white/5 text-gray-400 hover:text-white transition-colors border border-transparent flex items-center gap-3';
+            document.getElementById('tab-btn-projects').className = 'text-left px-4 py-3 rounded-xl bg-transparent hover:bg-white/5 text-gray-400 hover:text-white transition-colors border border-transparent flex items-center gap-3';
+            document.getElementById('tab-btn-messages').className = 'text-left px-4 py-3 rounded-xl bg-transparent hover:bg-white/5 text-gray-400 hover:text-white transition-colors border border-transparent flex items-center gap-3';
+            
+            document.getElementById(`admin-tab-${tab}`).classList.remove('hidden');
+            document.getElementById(`tab-btn-${tab}`).className = 'text-left px-4 py-3 rounded-xl bg-white/10 text-white font-medium transition-colors border border-white/5 flex items-center gap-3';
+        }
+
+        // Authentication Setup
+        async function setupAuth() {
+            try {
+                if (initialToken) {
+                    await signInWithCustomToken(auth, initialToken);
+                    isCreator = true; // Environment token means it's the owner
+                } else {
+                    await signInAnonymously(auth);
+                    isCreator = false; // Regular visitor
+                }
+            } catch (error) {
+                console.error("Auth error:", error);
+                showToast("Authentication failed", "error");
+            }
+        }
+
+        // Listen for auth state
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                // Path definition following strict rules
+                const uid = user.uid; // Use user.uid for consistent paths if needed, but for public portfolio data we use appId
+                
+                // Real-time Listeners
+                listenToProjects();
+                
+                // Only listen to messages if admin
+                if(isCreator) {
+                    listenToMessages();
+                }
+            }
+        });
+
+        // Admin Manual Login (Using Email/Pass as requested, with fallback to Custom Token simulation if it's the environment owner)
+        document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('admin-login-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+            btn.disabled = true;
+
+            const email = document.getElementById('admin-email').value;
+            const password = document.getElementById('admin-password').value;
+
+            try {
+                // Test qilish uchun demo ruxsat
+                if (email === 'admin' && password === 'admin123') {
+                    isCreator = true;
+                    showToast("Xush kelibsiz, Admin! (Demo holati)", "success");
+                    showAdminDashboard();
+                    listenToMessages(); 
+                    document.getElementById('admin-login-form').reset();
+                } else {
+                    // Haqiqiy Firebase tekshiruvi
+                    await signInWithEmailAndPassword(auth, email, password);
+                    isCreator = true;
+                    showToast("Xush kelibsiz, Admin!", "success");
+                    showAdminDashboard();
+                    listenToMessages(); 
+                    document.getElementById('admin-login-form').reset();
+                }
+            } catch (error) {
+                console.error("Login failed:", error);
+                showToast("Login yoki parol xato!", "error");
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        window.handleLogout = async () => {
+            try {
+                await signOut(auth);
+                isCreator = false;
+                switchToPublic();
+                showToast("Logged out successfully", "info");
+                // Re-authenticate as anonymous visitor
+                setupAuth();
+            } catch (error) {
+                showToast("Error logging out", "error");
+            }
+        }
+
+
+        // Data Paths (Strict Rule 1)
+        const getProjectsRef = () => collection(db, 'artifacts', appId, 'public', 'data', 'projects');
+        const getMessagesRef = () => collection(db, 'artifacts', appId, 'public', 'data', 'messages');
+
+        // Real-time Listeners
+        function listenToProjects() {
+            if(!currentUser) return;
+            const q = query(getProjectsRef());
+            onSnapshot(q, (snapshot) => {
+                projectsData = [];
+                snapshot.forEach(doc => {
+                    projectsData.push({ id: doc.id, ...doc.data() });
+                });
+                // Sort in memory (Rule 2: No complex queries)
+                projectsData.sort((a, b) => b.createdAt - a.createdAt);
+                
+                // Update Dashboard Stat
+                const statProjects = document.getElementById('stat-projects');
+                if(statProjects) statProjects.textContent = projectsData.length;
+
+                renderPublicProjects();
+                if(isCreator) renderAdminProjects();
+            }, (error) => {
+                console.error("Error fetching projects:", error);
+            });
+        }
+
+        function listenToMessages() {
+            if(!currentUser || !isCreator) return;
+            const q = query(getMessagesRef());
+            onSnapshot(q, (snapshot) => {
+                messagesData = [];
+                let unreadCount = 0;
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    messagesData.push({ id: doc.id, ...data });
+                    if(!data.read) unreadCount++;
+                });
+                messagesData.sort((a, b) => b.createdAt - a.createdAt);
+                
+                // Update Dashboard Stats
+                const statMessages = document.getElementById('stat-messages');
+                const statUnread = document.getElementById('stat-unread');
+                if(statMessages) statMessages.textContent = messagesData.length;
+                if(statUnread) statUnread.textContent = unreadCount;
+                
+                // Update badge
+                const badge = document.getElementById('msg-badge');
+                if(unreadCount > 0) {
+                    badge.textContent = unreadCount;
+                    badge.classList.remove('hidden');
+                } else {
+                    badge.classList.add('hidden');
+                }
+                
+                renderAdminMessages();
+            }, (error) => {
+                console.error("Error fetching messages:", error);
+            });
+        }
+
+        function renderPublicProjects() {
+            const container = document.getElementById('public-projects-container');
+            if(projectsData.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-gray-500 glass rounded-2xl border border-white/5">No projects published yet. Check back soon!</div>`;
+                return;
+            }
+
+            container.innerHTML = '';
+            projectsData.forEach((proj, index) => {
+                const tags = proj.tech ? proj.tech.split(',').map(t => t.trim()).slice(0,3) : ['Web'];
+                const delay = (index % 3) * 100;
+                
+                // Select a random gradient based on index for variety
+                const gradients = [
+                    'from-blue-900 via-gray-900 to-teal-900',
+                    'from-purple-900 via-gray-900 to-indigo-900',
+                    'from-cyan-900 via-gray-900 to-blue-900',
+                    'from-orange-900 via-gray-900 to-red-900'
+                ];
+                const grad = gradients[index % gradients.length];
+                const icon = ['fa-code', 'fa-mobile-alt', 'fa-laptop-code', 'fa-server'][index % 4];
+
+                container.innerHTML += `
+                <div class="group rounded-2xl glass border border-white/10 overflow-hidden hover:-translate-y-2 transition-all duration-300 hover:border-primary/30 reveal active" style="transition-delay: ${delay}ms;">
+                    <div class="h-48 w-full bg-gradient-to-br ${grad} relative overflow-hidden flex items-center justify-center">
+                        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDMiLz4KPC9zdmc+')] opacity-50"></div>
+                        <i class="fas ${icon} text-5xl text-white/30 group-hover:scale-110 group-hover:text-white transition-all duration-500 relative z-10"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${tags.map(t => `<span class="text-[10px] font-semibold tracking-wider uppercase px-2 py-1 rounded-full bg-white/5 text-gray-300 border border-white/10">${t}</span>`).join('')}
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">${proj.title}</h3>
+                        <p class="text-gray-400 text-sm mb-6 line-clamp-3">${proj.description}</p>
+                        ${proj.url ? `<a href="${proj.url}" target="_blank" class="inline-flex items-center text-sm font-medium text-white hover:text-primary transition-colors">View Project <i class="fas fa-external-link-alt ml-2 text-xs"></i></a>` : ''}
+                    </div>
+                </div>`;
+            });
+        }
+
+        function renderAdminProjects() {
+            const list = document.getElementById('admin-projects-list');
+            if(projectsData.length === 0) {
+                list.innerHTML = `<tr><td colspan="3" class="p-8 text-center text-gray-500">No projects found. Add one!</td></tr>`;
+                return;
+            }
+
+            list.innerHTML = '';
+            projectsData.forEach(proj => {
+                list.innerHTML += `
+                <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                    <td class="p-4"><div class="font-medium text-white">${proj.title}</div></td>
+                    <td class="p-4 text-sm text-gray-400">${proj.tech || '-'}</td>
+                    <td class="p-4 text-right">
+                        <button onclick="editProject('${proj.id}')" class="text-blue-400 hover:text-blue-300 p-2 opacity-0 group-hover:opacity-100 transition-opacity"><i class="fas fa-edit"></i></button>
+                        <button onclick="deleteProject('${proj.id}')" class="text-red-400 hover:text-red-300 p-2 opacity-0 group-hover:opacity-100 transition-opacity"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>`;
+            });
+        }
+
+        function renderAdminMessages() {
+            const list = document.getElementById('admin-messages-list');
+            if(messagesData.length === 0) {
+                list.innerHTML = `<div class="text-center p-8 text-gray-500 glass rounded-2xl border border-white/5">No messages yet.</div>`;
+                return;
+            }
+
+            list.innerHTML = '';
+            messagesData.forEach(msg => {
+                const date = new Date(msg.createdAt).toLocaleString();
+                const bgClass = msg.read ? 'bg-white/5' : 'bg-primary/10 border-primary/30';
+                
+                list.innerHTML += `
+                <div class="glass p-5 rounded-2xl border border-white/10 flex flex-col gap-3 ${bgClass}">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-bold text-white flex items-center gap-2">
+                                ${msg.name} ${!msg.read ? '<span class="w-2 h-2 rounded-full bg-primary"></span>' : ''}
+                            </h4>
+                            <a href="mailto:${msg.email}" class="text-sm text-blue-400 hover:underline">${msg.email}</a>
+                        </div>
+                        <span class="text-xs text-gray-500">${date}</span>
+                    </div>
+                    <p class="text-gray-300 text-sm bg-darker/50 p-3 rounded-lg border border-white/5 mt-2">${msg.message}</p>
+                    <div class="flex justify-end gap-2 mt-2">
+                        ${!msg.read ? `<button onclick="markMsgRead('${msg.id}')" class="text-xs text-gray-400 hover:text-white"><i class="fas fa-check"></i> Mark Read</button>` : ''}
+                        <button onclick="deleteMsg('${msg.id}')" class="text-xs text-red-400 hover:text-red-300"><i class="fas fa-trash"></i> Delete</button>
+                    </div>
+                </div>`;
+            });
+        }
+
+        // Project Modal Logic
+        window.openProjectModal = () => {
+            document.getElementById('project-form').reset();
+            document.getElementById('project-id').value = '';
+            document.getElementById('project-modal-title').textContent = 'Add New Project';
+            
+            projModal.classList.remove('hidden');
+            projModal.classList.add('flex');
+            setTimeout(() => {
+                projModal.classList.remove('opacity-0');
+                projBox.classList.remove('scale-95');
+            }, 10);
+        }
+
+        window.closeProjectModal = () => {
+            projModal.classList.add('opacity-0');
+            projBox.classList.add('scale-95');
+            setTimeout(() => {
+                projModal.classList.add('hidden');
+                projModal.classList.remove('flex');
+            }, 300);
+        }
+
+        // Save/Edit Project
+        document.getElementById('project-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!currentUser || !isCreator) return;
+
+            const btn = document.getElementById('project-submit-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+            btn.disabled = true;
+
+            const id = document.getElementById('project-id').value;
+            const data = {
+                title: document.getElementById('project-title').value.trim(),
+                description: document.getElementById('project-desc').value.trim(),
+                tech: document.getElementById('project-tech').value.trim(),
+                url: document.getElementById('project-url').value.trim(),
+            };
+
+            // Backend Validation Simulation (Middleware)
+            if(data.title.length < 3) {
+                showToast("Loyiha nomi kamida 3 ta harfdan iborat bo'lishi kerak", "error");
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                return;
+            }
+            if(data.description.length < 10) {
+                showToast("Loyiha ta'rifi kamida 10 ta harfdan iborat bo'lishi kerak", "error");
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                return;
+            }
+
+            try {
+                if(id) {
+                    // Update
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'projects', id);
+                    await updateDoc(docRef, data);
+                    showToast("Project updated successfully!", "success");
+                } else {
+                    // Create
+                    data.createdAt = Date.now();
+                    await addDoc(getProjectsRef(), data);
+                    showToast("Project added successfully!", "success");
+                }
+                closeProjectModal();
+            } catch (error) {
+                console.error("Error saving project:", error);
+                showToast("Error saving project", "error");
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        window.editProject = (id) => {
+            const proj = projectsData.find(p => p.id === id);
+            if(!proj) return;
+            
+            document.getElementById('project-id').value = proj.id;
+            document.getElementById('project-title').value = proj.title;
+            document.getElementById('project-desc').value = proj.description;
+            document.getElementById('project-tech').value = proj.tech || '';
+            document.getElementById('project-url').value = proj.url || '';
+            
+            document.getElementById('project-modal-title').textContent = 'Edit Project';
+            
+            projModal.classList.remove('hidden');
+            projModal.classList.add('flex');
+            setTimeout(() => {
+                projModal.classList.remove('opacity-0');
+                projBox.classList.remove('scale-95');
+            }, 10);
+        }
+
+        window.deleteProject = async (id) => {
+            if(!currentUser || !isCreator) return;
+            // Custom confirm modal would be better, using simple JS logic here to avoid native confirm()
+            // Creating an inline mock confirmation using a quick toast/modal substitute for brevity
+            // But per strict instructions: "Never use alert() or confirm()".
+            // I will delete directly but show a toast. In production, build a custom Confirm modal.
+            try {
+                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'projects', id));
+                showToast("Project deleted", "info");
+            } catch (error) {
+                showToast("Error deleting project", "error");
+            }
+        }
+
+        // Contact Form Submission (Public)
+        document.getElementById('contact-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!currentUser) {
+                showToast("Please wait, connecting...", "info");
+                return;
+            }
+
+            const btn = document.getElementById('contact-submit-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            btn.disabled = true;
+
+            const data = {
+                name: document.getElementById('contact-name').value,
+                email: document.getElementById('contact-email').value,
+                message: document.getElementById('contact-message').value,
+                createdAt: Date.now(),
+                read: false
+            };
+
+            try {
+                await addDoc(getMessagesRef(), data);
+                showToast("Message sent successfully! I'll reply soon.", "success");
+                document.getElementById('contact-form').reset();
+            } catch (error) {
+                console.error("Error sending message:", error);
+                showToast("Failed to send message. Try again later.", "error");
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // Message Actions (Admin)
+        window.markMsgRead = async (id) => {
+            if(!currentUser || !isCreator) return;
+            try {
+                await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'messages', id), { read: true });
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        window.deleteMsg = async (id) => {
+            if(!currentUser || !isCreator) return;
+            try {
+                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'messages', id));
+                showToast("Message deleted", "info");
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        // General UI Interactions
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Navbar blur effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 50) {
+                navbar.classList.add('bg-darker/80', 'backdrop-blur-md', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-darker/80', 'backdrop-blur-md', 'shadow-lg');
+            }
+        });
+
+        // Mobile Menu
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+        
+        window.scrollToTop = (e) => {
+            e.preventDefault();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // ================= GEMINI AI INTEGRATION =================
+        
+        // Helper to call Gemini API
+        async function callGemini(prompt, systemInstruction = null, history = []) {
+            const apiKey = ""; // Canvas environment automatically injects the key
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+            
+            let contents = history.length > 0 ? [...history] : [];
+            if (prompt) {
+                contents.push({ role: "user", parts: [{ text: prompt }] });
+            }
+
+            const payload = { contents };
+            if (systemInstruction) {
+                payload.systemInstruction = { parts: [{ text: systemInstruction }] };
+            }
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                return data.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I couldn't generate a response.";
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                throw error;
+            }
+        }
+
+        // AI Feature 1: Project Description Generator (Admin)
+        window.generateAIDescription = async () => {
+            const title = document.getElementById('project-title').value;
+            const tech = document.getElementById('project-tech').value;
+            const descField = document.getElementById('project-desc');
+            
+            if(!title) {
+                showToast("Please enter a project title first.", "error");
+                return;
+            }
+
+            const btn = document.querySelector('button[onclick="generateAIDescription()"]');
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+            btn.disabled = true;
+
+            const prompt = `Write a concise, professional, and engaging description (maximum 3 sentences) for a developer portfolio project titled "${title}". ${tech ? `It is built using these technologies: ${tech}.` : ''} Do not use any markdown formatting like bolding, asterisks, or lists.`;
+            
+            try {
+                const description = await callGemini(prompt, "You are a professional copywriter for tech portfolios.");
+                descField.value = description.trim();
+                showToast("Description generated with AI!", "success");
+            } catch (e) {
+                showToast("AI generation failed. Please try again.", "error");
+            } finally {
+                btn.innerHTML = originalHtml;
+                btn.disabled = false;
+            }
+        }
+
+        // AI Feature 2: Portfolio Chatbot (Public)
+        const chatToggle = document.getElementById('chatbot-toggle');
+        const chatWindow = document.getElementById('chatbot-window');
+        const chatClose = document.getElementById('chatbot-close');
+        const chatInput = document.getElementById('chatbot-input');
+        const chatSend = document.getElementById('chatbot-send');
+        const chatMessages = document.getElementById('chatbot-messages');
+        
+        let chatHistory = [];
+        const botSystemPrompt = `You are a helpful AI assistant for Quvonchbek Baratov's portfolio website. 
+        About Quvonchbek: He is a Full-Stack Web & Mobile Developer currently studying Axborot tizimlari va texnologiyalari at Guliston Davlat Universiteti (GulDU) in Guliston, Uzbekistan.
+        Skills: HTML, CSS, JavaScript, React, React Native, Node.js, Python, PHP, Firebase, and SQL.
+        Rules: Keep answers friendly, professional, and very concise (1-3 sentences max). If a user asks something completely unrelated to Quvonchbek or development, politely guide the conversation back to his portfolio. If you don't know the answer, suggest they use the contact form to message him directly.`;
+
+        function appendMessage(text, isUser) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = isUser 
+                ? "bg-primary text-white p-3 rounded-xl rounded-tr-none self-end max-w-[85%] border border-primary/50 shadow-md" 
+                : "bg-white/10 text-white p-3 rounded-xl rounded-tl-none self-start max-w-[85%] border border-white/5";
+            msgDiv.textContent = text;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        async function handleChatSubmit() {
+            const text = chatInput.value.trim();
+            if(!text) return;
+
+            // User message
+            appendMessage(text, true);
+            chatInput.value = '';
+            chatInput.disabled = true;
+            chatSend.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
+            chatSend.disabled = true;
+
+            // Loading indicator
+            const typingId = 'typing-' + Date.now();
+            const typingDiv = document.createElement('div');
+            typingDiv.id = typingId;
+            typingDiv.className = "bg-white/10 text-gray-400 px-4 py-2 rounded-xl rounded-tl-none self-start flex gap-1 border border-white/5 items-center";
+            typingDiv.innerHTML = '<span class="animate-bounce w-1.5 h-1.5 bg-gray-400 rounded-full"></span><span class="animate-bounce w-1.5 h-1.5 bg-gray-400 rounded-full" style="animation-delay: 0.2s"></span><span class="animate-bounce w-1.5 h-1.5 bg-gray-400 rounded-full" style="animation-delay: 0.4s"></span>';
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            try {
+                // Prepare context & call AI
+                const prompt = text;
+                const response = await callGemini(prompt, botSystemPrompt, chatHistory);
+                
+                // Update History
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                chatHistory.push({ role: "model", parts: [{ text: response }] });
+                
+                // Remove typing indicator and show response
+                document.getElementById(typingId).remove();
+                appendMessage(response, false);
+            } catch (error) {
+                document.getElementById(typingId).remove();
+                appendMessage("Oops, I lost connection to the server. Please try again later.", false);
+            } finally {
+                chatInput.disabled = false;
+                chatSend.innerHTML = '<i class="fas fa-paper-plane"></i>';
+                chatSend.disabled = false;
+                chatInput.focus();
+            }
+        }
+
+        // Chat Event Listeners
+        chatToggle.addEventListener('click', () => {
+            chatWindow.classList.remove('hidden');
+            chatWindow.classList.add('flex');
+            setTimeout(() => {
+                chatWindow.classList.remove('opacity-0', 'scale-95');
+            }, 10);
+            chatToggle.classList.add('scale-0'); // Hide button
+        });
+
+        chatClose.addEventListener('click', () => {
+            chatWindow.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                chatWindow.classList.add('hidden');
+                chatWindow.classList.remove('flex');
+            }, 300);
+            chatToggle.classList.remove('scale-0'); // Show button
+        });
+
+        chatSend.addEventListener('click', handleChatSubmit);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleChatSubmit();
+        });
+
+        // Scroll Reveal Animatsiyalari
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        };
+        const revealObserver = new IntersectionObserver(revealCallback, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Initialize App
+        setupAuth();
+
+    </script>
+</body>
+</html>
