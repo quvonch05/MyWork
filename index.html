@@ -145,11 +145,11 @@
                     </div>
                 </div>
                 <div class="w-full md:w-1/2 reveal relative">
-                    <div class="aspect-square max-w-md mx-auto rounded-3xl overflow-hidden border border-white/10 relative z-10 glass">
-                        <!-- Placeholder - Kelajakda o'z rasmingizni URL'ini shu yerga qo'yishingiz mumkin -->
-                        <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-darker to-dark text-6xl font-bold text-white/10 image">
-                            QB.
-                        </div>
+                    <div class="aspect-square max-w-md mx-auto rounded-3xl overflow-hidden border border-white/10 relative z-10 glass flex items-center justify-center bg-gradient-to-br from-darker to-dark">
+                        <!-- Dynamic Profile Image loaded from DB -->
+                        <img id="profile-dynamic-img" src="" class="w-full h-full object-cover hidden" alt="Profile">
+                        <!-- Placeholder if no image URL -->
+                        <div id="profile-placeholder" class="text-6xl font-bold text-white/10 image">QB.</div>
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-full filter blur-3xl -z-10"></div>
                 </div>
@@ -166,42 +166,34 @@
                 <div class="w-16 h-1 bg-gradient-to-r from-primary to-secondary rounded mx-auto mb-12"></div>
                 
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                    <!-- HTML5 -->
                     <div class="group p-6 glass rounded-2xl border border-white/5 hover:border-orange-500/50 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-orange-500/20">
                         <i class="fab fa-html5 text-5xl text-gray-500 group-hover:text-orange-500 transition-colors mb-4 block"></i>
                         <h3 class="text-white font-medium">HTML5</h3>
                     </div>
-                    <!-- CSS3 -->
                     <div class="group p-6 glass rounded-2xl border border-white/5 hover:border-blue-500/50 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-blue-500/20">
                         <i class="fab fa-css3-alt text-5xl text-gray-500 group-hover:text-blue-500 transition-colors mb-4 block"></i>
                         <h3 class="text-white font-medium">CSS3</h3>
                     </div>
-                    <!-- JavaScript -->
                     <div class="group p-6 glass rounded-2xl border border-white/5 hover:border-yellow-400/50 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-yellow-400/20">
                         <i class="fab fa-js text-5xl text-gray-500 group-hover:text-yellow-400 transition-colors mb-4 block"></i>
                         <h3 class="text-white font-medium">JavaScript</h3>
                     </div>
-                    <!-- React -->
                     <div class="group p-6 glass rounded-2xl border border-white/5 hover:border-cyan-400/50 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-cyan-400/20">
                         <i class="fab fa-react text-5xl text-gray-500 group-hover:text-cyan-400 transition-colors mb-4 block"></i>
                         <h3 class="text-white font-medium">React / Native</h3>
                     </div>
-                    <!-- Node.js -->
                     <div class="group p-6 glass rounded-2xl border border-white/5 hover:border-green-500/50 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-green-500/20">
                         <i class="fab fa-node-js text-5xl text-gray-500 group-hover:text-green-500 transition-colors mb-4 block"></i>
                         <h3 class="text-white font-medium">Node.js</h3>
                     </div>
-                    <!-- Python -->
                     <div class="group p-6 glass rounded-2xl border border-white/5 hover:border-blue-400/50 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-blue-400/20">
                         <i class="fab fa-python text-5xl text-gray-500 group-hover:text-blue-400 transition-colors mb-4 block"></i>
                         <h3 class="text-white font-medium">Python</h3>
                     </div>
-                    <!-- PHP -->
                     <div class="group p-6 glass rounded-2xl border border-white/5 hover:border-indigo-400/50 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-indigo-400/20">
                         <i class="fab fa-php text-5xl text-gray-500 group-hover:text-indigo-400 transition-colors mb-4 block"></i>
                         <h3 class="text-white font-medium">PHP</h3>
                     </div>
-                    <!-- Database -->
                     <div class="group p-6 glass rounded-2xl border border-white/5 hover:border-emerald-400/50 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-emerald-400/20">
                         <i class="fas fa-database text-5xl text-gray-500 group-hover:text-emerald-400 transition-colors mb-4 block"></i>
                         <h3 class="text-white font-medium">SQL / NoSQL</h3>
@@ -220,9 +212,7 @@
                     </div>
                 </div>
                 
-                <!-- Projects Container -->
                 <div id="public-projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Loading Skeleton -->
                     <div class="glass p-6 rounded-2xl border border-white/10 animate-pulse">
                         <div class="h-40 bg-white/5 rounded-xl mb-4"></div>
                         <div class="h-6 w-1/2 bg-white/5 rounded mb-2"></div>
@@ -271,7 +261,6 @@
                     <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fab fa-telegram text-xl"></i></a>
                 </div>
                 <p class="text-sm text-gray-500">&copy; <span id="year"></span> Quvonchbek Baratov. All rights reserved.</p>
-                <!-- Admin Login Link -->
                 <button onclick="openAdminLogin()" class="text-xs text-gray-600 hover:text-primary transition-colors flex items-center gap-1">
                     <i class="fas fa-lock"></i> Admin Panel
                 </button>
@@ -336,13 +325,17 @@
                 <button onclick="switchAdminTab('messages')" id="tab-btn-messages" class="text-left px-4 py-3 rounded-xl bg-transparent hover:bg-white/5 text-gray-400 hover:text-white transition-colors border border-transparent flex items-center gap-3">
                     <i class="fas fa-envelope w-5"></i> Messages <span id="msg-badge" class="ml-auto bg-primary text-xs rounded-full px-2 py-0.5 hidden">0</span>
                 </button>
+                <!-- YANGA SOZLAMALAR BO'LIMI -->
+                <button onclick="switchAdminTab('settings')" id="tab-btn-settings" class="text-left px-4 py-3 rounded-xl bg-transparent hover:bg-white/5 text-gray-400 hover:text-white transition-colors border border-transparent flex items-center gap-3">
+                    <i class="fas fa-cog w-5"></i> Settings
+                </button>
             </div>
 
             <!-- Main Content Area -->
             <div class="flex-grow">
                 <!-- Dashboard Tab -->
                 <div id="admin-tab-dashboard" class="block animate-fade-in-up">
-                    <h2 class="text-xl font-bold mb-6">Umumiy Statistika (Backend API)</h2>
+                    <h2 class="text-xl font-bold mb-6">Umumiy Statistika</h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                         <div class="glass p-6 rounded-2xl border border-white/5 relative overflow-hidden group">
                             <div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/20 rounded-full blur-2xl group-hover:bg-primary/30 transition-colors"></div>
@@ -381,7 +374,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id="admin-projects-list" class="divide-y divide-white/5">
-                                    <!-- Populated by JS -->
                                     <tr><td colspan="3" class="p-8 text-center text-gray-500">Loading projects...</td></tr>
                                 </tbody>
                             </table>
@@ -393,8 +385,27 @@
                 <div id="admin-tab-messages" class="hidden animate-fade-in-up">
                     <h2 class="text-xl font-bold mb-6">Inbox Messages</h2>
                     <div class="grid grid-cols-1 gap-4" id="admin-messages-list">
-                        <!-- Populated by JS -->
                         <div class="text-center p-8 text-gray-500 glass rounded-2xl border border-white/5">Loading messages...</div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab (YANGI QO'SHILDI) -->
+                <div id="admin-tab-settings" class="hidden animate-fade-in-up">
+                    <h2 class="text-xl font-bold mb-6">Sayt Sozlamalari</h2>
+                    <div class="glass p-8 rounded-3xl border border-white/10 flex flex-col gap-6 max-w-2xl">
+                        <div>
+                            <label class="text-sm text-gray-400 ml-1 mb-2 block">Shaxsiy rasm URL manzili</label>
+                            <input type="text" id="setting-img-url" placeholder="https://..." class="w-full bg-darker/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary">
+                            <p class="text-xs text-gray-500 mt-2">Men haqimda bo'limida chiqadigan rasmingizning internetdagi linkini kiriting.</p>
+                        </div>
+                        <div>
+                            <label class="text-sm text-gray-400 ml-1 mb-2 block">AI Chatbot API Kaliti (Google Gemini)</label>
+                            <input type="password" id="setting-ai-key" placeholder="AI API kalitini kiriting..." class="w-full bg-darker/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary">
+                            <p class="text-xs text-gray-500 mt-2">Chatbot ishlashi va avtomatik ta'rif yozish imkoniyati uchun kerak.</p>
+                        </div>
+                        <button onclick="saveGlobalSettings()" class="mt-4 bg-gradient-to-r from-primary to-secondary text-white font-medium py-3 px-8 rounded-xl hover:opacity-90 transition-opacity self-start">
+                            Sozlamalarni Saqlash
+                        </button>
                     </div>
                 </div>
             </div>
@@ -464,15 +475,20 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot, query, serverTimestamp, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Global Variables
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'quvonchbek-portfolio';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-            // Fallback mock config for safe parsing if env var missing
-            apiKey: "mock", authDomain: "mock", projectId: "mock"
+        const appId = 'quvonchbek-portfolio';
+        // SIZNING FIREBASE KALITINGIZ ULANDI
+        const firebaseConfig = {
+            apiKey: "AIzaSyARPL5zlN2VyGaDWnYDuCsDWcvN-nOAbtw",
+            authDomain: "portfolio-web-74693.firebaseapp.com",
+            projectId: "portfolio-web-74693",
+            storageBucket: "portfolio-web-74693.firebasestorage.app",
+            messagingSenderId: "1014119647038",
+            appId: "1:1014119647038:web:c2550fc5008091f268ce6f",
+            measurementId: "G-29NEMP9TC3"
         };
-        const initialToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        const initialToken = null;
 
         // Init Firebase
         const app = initializeApp(firebaseConfig);
@@ -481,9 +497,10 @@
 
         // State
         let currentUser = null;
-        let isCreator = false; // Identifies if the logged-in user is the admin
+        let isCreator = false; 
         let projectsData = [];
         let messagesData = [];
+        let globalAiKey = ""; // Dinamik AI kaliti
         
         // DOM Elements
         const publicView = document.getElementById('public-view');
@@ -514,10 +531,63 @@
             }, 3000);
         }
 
+        // ================= SOZLAMALARNI YUKLASH (YANGI QO'SHILDI) =================
+        async function loadGlobalSettings() {
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'settings', 'global');
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    
+                    if(data.profileImage) {
+                        document.getElementById('profile-dynamic-img').src = data.profileImage;
+                        document.getElementById('profile-dynamic-img').classList.remove('hidden');
+                        document.getElementById('profile-placeholder').classList.add('hidden');
+                        document.getElementById('setting-img-url').value = data.profileImage;
+                    }
+                    if(data.aiKey) {
+                        globalAiKey = data.aiKey;
+                        document.getElementById('setting-ai-key').value = data.aiKey;
+                    }
+                }
+            } catch(e) {
+                console.error("Sozlamalarni yuklashda xatolik:", e);
+            }
+        }
+
+        window.saveGlobalSettings = async () => {
+            if(!isCreator) return;
+            const imgUrl = document.getElementById('setting-img-url').value.trim();
+            const aiKey = document.getElementById('setting-ai-key').value.trim();
+            
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'settings', 'global');
+                await setDoc(docRef, {
+                    profileImage: imgUrl,
+                    aiKey: aiKey
+                }, { merge: true });
+                
+                showToast("Sozlamalar saqlandi!", "success");
+                
+                if(imgUrl) {
+                    document.getElementById('profile-dynamic-img').src = imgUrl;
+                    document.getElementById('profile-dynamic-img').classList.remove('hidden');
+                    document.getElementById('profile-placeholder').classList.add('hidden');
+                } else {
+                    document.getElementById('profile-dynamic-img').classList.add('hidden');
+                    document.getElementById('profile-placeholder').classList.remove('hidden');
+                }
+                
+                globalAiKey = aiKey;
+            } catch(e) {
+                showToast("Xatolik yuz berdi", "error");
+                console.error(e);
+            }
+        };
+
         // UI View Toggles
         window.openAdminLogin = () => {
             if(isCreator) {
-                // If already authenticated as creator, go straight to dashboard
                 showAdminDashboard();
             } else {
                 loginModal.classList.remove('hidden');
@@ -554,13 +624,12 @@
         }
 
         window.switchAdminTab = (tab) => {
-            document.getElementById('admin-tab-dashboard').classList.add('hidden');
-            document.getElementById('admin-tab-projects').classList.add('hidden');
-            document.getElementById('admin-tab-messages').classList.add('hidden');
+            const tabs = ['dashboard', 'projects', 'messages', 'settings'];
             
-            document.getElementById('tab-btn-dashboard').className = 'text-left px-4 py-3 rounded-xl bg-transparent hover:bg-white/5 text-gray-400 hover:text-white transition-colors border border-transparent flex items-center gap-3';
-            document.getElementById('tab-btn-projects').className = 'text-left px-4 py-3 rounded-xl bg-transparent hover:bg-white/5 text-gray-400 hover:text-white transition-colors border border-transparent flex items-center gap-3';
-            document.getElementById('tab-btn-messages').className = 'text-left px-4 py-3 rounded-xl bg-transparent hover:bg-white/5 text-gray-400 hover:text-white transition-colors border border-transparent flex items-center gap-3';
+            tabs.forEach(t => {
+                document.getElementById(`admin-tab-${t}`).classList.add('hidden');
+                document.getElementById(`tab-btn-${t}`).className = 'text-left px-4 py-3 rounded-xl bg-transparent hover:bg-white/5 text-gray-400 hover:text-white transition-colors border border-transparent flex items-center gap-3';
+            });
             
             document.getElementById(`admin-tab-${tab}`).classList.remove('hidden');
             document.getElementById(`tab-btn-${tab}`).className = 'text-left px-4 py-3 rounded-xl bg-white/10 text-white font-medium transition-colors border border-white/5 flex items-center gap-3';
@@ -569,16 +638,11 @@
         // Authentication Setup
         async function setupAuth() {
             try {
-                if (initialToken) {
-                    await signInWithCustomToken(auth, initialToken);
-                    isCreator = true; // Environment token means it's the owner
-                } else {
-                    await signInAnonymously(auth);
-                    isCreator = false; // Regular visitor
-                }
+                await signInAnonymously(auth);
+                isCreator = false; 
+                loadGlobalSettings(); // Tashrif buyuruvchi uchun ham rasmlarni yuklash
             } catch (error) {
                 console.error("Auth error:", error);
-                showToast("Authentication failed", "error");
             }
         }
 
@@ -586,20 +650,15 @@
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
-                // Path definition following strict rules
-                const uid = user.uid; // Use user.uid for consistent paths if needed, but for public portfolio data we use appId
-                
-                // Real-time Listeners
                 listenToProjects();
                 
-                // Only listen to messages if admin
                 if(isCreator) {
                     listenToMessages();
                 }
             }
         });
 
-        // Admin Manual Login (Using Email/Pass as requested, with fallback to Custom Token simulation if it's the environment owner)
+        // Admin Manual Login
         document.getElementById('admin-login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('admin-login-btn');
@@ -611,7 +670,6 @@
             const password = document.getElementById('admin-password').value;
 
             try {
-                // Test qilish uchun demo ruxsat
                 if (email === 'admin' && password === 'admin123') {
                     isCreator = true;
                     showToast("Xush kelibsiz, Admin! (Demo holati)", "success");
@@ -619,7 +677,6 @@
                     listenToMessages(); 
                     document.getElementById('admin-login-form').reset();
                 } else {
-                    // Haqiqiy Firebase tekshiruvi
                     await signInWithEmailAndPassword(auth, email, password);
                     isCreator = true;
                     showToast("Xush kelibsiz, Admin!", "success");
@@ -628,7 +685,6 @@
                     document.getElementById('admin-login-form').reset();
                 }
             } catch (error) {
-                console.error("Login failed:", error);
                 showToast("Login yoki parol xato!", "error");
             } finally {
                 btn.innerHTML = originalText;
@@ -642,7 +698,6 @@
                 isCreator = false;
                 switchToPublic();
                 showToast("Logged out successfully", "info");
-                // Re-authenticate as anonymous visitor
                 setupAuth();
             } catch (error) {
                 showToast("Error logging out", "error");
@@ -650,7 +705,7 @@
         }
 
 
-        // Data Paths (Strict Rule 1)
+        // Data Paths 
         const getProjectsRef = () => collection(db, 'artifacts', appId, 'public', 'data', 'projects');
         const getMessagesRef = () => collection(db, 'artifacts', appId, 'public', 'data', 'messages');
 
@@ -663,17 +718,13 @@
                 snapshot.forEach(doc => {
                     projectsData.push({ id: doc.id, ...doc.data() });
                 });
-                // Sort in memory (Rule 2: No complex queries)
                 projectsData.sort((a, b) => b.createdAt - a.createdAt);
                 
-                // Update Dashboard Stat
                 const statProjects = document.getElementById('stat-projects');
                 if(statProjects) statProjects.textContent = projectsData.length;
 
                 renderPublicProjects();
                 if(isCreator) renderAdminProjects();
-            }, (error) => {
-                console.error("Error fetching projects:", error);
             });
         }
 
@@ -690,13 +741,11 @@
                 });
                 messagesData.sort((a, b) => b.createdAt - a.createdAt);
                 
-                // Update Dashboard Stats
                 const statMessages = document.getElementById('stat-messages');
                 const statUnread = document.getElementById('stat-unread');
                 if(statMessages) statMessages.textContent = messagesData.length;
                 if(statUnread) statUnread.textContent = unreadCount;
                 
-                // Update badge
                 const badge = document.getElementById('msg-badge');
                 if(unreadCount > 0) {
                     badge.textContent = unreadCount;
@@ -706,8 +755,6 @@
                 }
                 
                 renderAdminMessages();
-            }, (error) => {
-                console.error("Error fetching messages:", error);
             });
         }
 
@@ -723,7 +770,6 @@
                 const tags = proj.tech ? proj.tech.split(',').map(t => t.trim()).slice(0,3) : ['Web'];
                 const delay = (index % 3) * 100;
                 
-                // Select a random gradient based on index for variety
                 const gradients = [
                     'from-blue-900 via-gray-900 to-teal-900',
                     'from-purple-900 via-gray-900 to-indigo-900',
@@ -845,7 +891,6 @@
                 url: document.getElementById('project-url').value.trim(),
             };
 
-            // Backend Validation Simulation (Middleware)
             if(data.title.length < 3) {
                 showToast("Loyiha nomi kamida 3 ta harfdan iborat bo'lishi kerak", "error");
                 btn.innerHTML = originalText;
@@ -861,19 +906,16 @@
 
             try {
                 if(id) {
-                    // Update
                     const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'projects', id);
                     await updateDoc(docRef, data);
                     showToast("Project updated successfully!", "success");
                 } else {
-                    // Create
                     data.createdAt = Date.now();
                     await addDoc(getProjectsRef(), data);
                     showToast("Project added successfully!", "success");
                 }
                 closeProjectModal();
             } catch (error) {
-                console.error("Error saving project:", error);
                 showToast("Error saving project", "error");
             } finally {
                 btn.innerHTML = originalText;
@@ -903,10 +945,6 @@
 
         window.deleteProject = async (id) => {
             if(!currentUser || !isCreator) return;
-            // Custom confirm modal would be better, using simple JS logic here to avoid native confirm()
-            // Creating an inline mock confirmation using a quick toast/modal substitute for brevity
-            // But per strict instructions: "Never use alert() or confirm()".
-            // I will delete directly but show a toast. In production, build a custom Confirm modal.
             try {
                 await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'projects', id));
                 showToast("Project deleted", "info");
@@ -941,7 +979,6 @@
                 showToast("Message sent successfully! I'll reply soon.", "success");
                 document.getElementById('contact-form').reset();
             } catch (error) {
-                console.error("Error sending message:", error);
                 showToast("Failed to send message. Try again later.", "error");
             } finally {
                 btn.innerHTML = originalText;
@@ -949,14 +986,11 @@
             }
         });
 
-        // Message Actions (Admin)
         window.markMsgRead = async (id) => {
             if(!currentUser || !isCreator) return;
             try {
                 await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'messages', id), { read: true });
-            } catch (error) {
-                console.error(error);
-            }
+            } catch (error) {}
         }
 
         window.deleteMsg = async (id) => {
@@ -964,15 +998,11 @@
             try {
                 await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'messages', id));
                 showToast("Message deleted", "info");
-            } catch (error) {
-                console.error(error);
-            }
+            } catch (error) {}
         }
 
-        // General UI Interactions
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Navbar blur effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if(window.scrollY > 50) {
@@ -982,7 +1012,6 @@
             }
         });
 
-        // Mobile Menu
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         document.querySelectorAll('.mobile-link').forEach(link => {
@@ -1003,10 +1032,13 @@
 
         // ================= GEMINI AI INTEGRATION =================
         
-        // Helper to call Gemini API
         async function callGemini(prompt, systemInstruction = null, history = []) {
-            const apiKey = ""; // Canvas environment automatically injects the key
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+            // Endi API kalitini Admin paneldan kelayotgan globalAiKey dan oladi
+            if(!globalAiKey) {
+                throw new Error("API kaliti topilmadi! Iltimos, Admin paneldan Sozlamalar bo'limiga kirib Gemini API kalitini kiriting.");
+            }
+            
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${globalAiKey}`;
             
             let contents = history.length > 0 ? [...history] : [];
             if (prompt) {
@@ -1018,21 +1050,19 @@
                 payload.systemInstruction = { parts: [{ text: systemInstruction }] };
             }
 
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                const data = await response.json();
-                return data.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I couldn't generate a response.";
-            } catch (error) {
-                console.error("Gemini API Error:", error);
-                throw error;
-            }
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await response.json();
+            
+            if(data.error) throw new Error(data.error.message);
+            
+            return data.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I couldn't generate a response.";
         }
 
-        // AI Feature 1: Project Description Generator (Admin)
+        // AI Feature 1: Project Description Generator
         window.generateAIDescription = async () => {
             const title = document.getElementById('project-title').value;
             const tech = document.getElementById('project-tech').value;
@@ -1055,14 +1085,14 @@
                 descField.value = description.trim();
                 showToast("Description generated with AI!", "success");
             } catch (e) {
-                showToast("AI generation failed. Please try again.", "error");
+                showToast(e.message || "AI generation failed. Please try again.", "error");
             } finally {
                 btn.innerHTML = originalHtml;
                 btn.disabled = false;
             }
         }
 
-        // AI Feature 2: Portfolio Chatbot (Public)
+        // AI Feature 2: Portfolio Chatbot
         const chatToggle = document.getElementById('chatbot-toggle');
         const chatWindow = document.getElementById('chatbot-window');
         const chatClose = document.getElementById('chatbot-close');
@@ -1090,14 +1120,12 @@
             const text = chatInput.value.trim();
             if(!text) return;
 
-            // User message
             appendMessage(text, true);
             chatInput.value = '';
             chatInput.disabled = true;
             chatSend.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
             chatSend.disabled = true;
 
-            // Loading indicator
             const typingId = 'typing-' + Date.now();
             const typingDiv = document.createElement('div');
             typingDiv.id = typingId;
@@ -1107,20 +1135,16 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
             try {
-                // Prepare context & call AI
-                const prompt = text;
-                const response = await callGemini(prompt, botSystemPrompt, chatHistory);
+                const response = await callGemini(text, botSystemPrompt, chatHistory);
                 
-                // Update History
-                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                chatHistory.push({ role: "user", parts: [{ text }] });
                 chatHistory.push({ role: "model", parts: [{ text: response }] });
                 
-                // Remove typing indicator and show response
                 document.getElementById(typingId).remove();
                 appendMessage(response, false);
             } catch (error) {
                 document.getElementById(typingId).remove();
-                appendMessage("Oops, I lost connection to the server. Please try again later.", false);
+                appendMessage(error.message.includes("API kaliti") ? error.message : "Oops, I lost connection to the server. Please try again later.", false);
             } finally {
                 chatInput.disabled = false;
                 chatSend.innerHTML = '<i class="fas fa-paper-plane"></i>';
@@ -1129,14 +1153,13 @@
             }
         }
 
-        // Chat Event Listeners
         chatToggle.addEventListener('click', () => {
             chatWindow.classList.remove('hidden');
             chatWindow.classList.add('flex');
             setTimeout(() => {
                 chatWindow.classList.remove('opacity-0', 'scale-95');
             }, 10);
-            chatToggle.classList.add('scale-0'); // Hide button
+            chatToggle.classList.add('scale-0');
         });
 
         chatClose.addEventListener('click', () => {
@@ -1145,7 +1168,7 @@
                 chatWindow.classList.add('hidden');
                 chatWindow.classList.remove('flex');
             }, 300);
-            chatToggle.classList.remove('scale-0'); // Show button
+            chatToggle.classList.remove('scale-0');
         });
 
         chatSend.addEventListener('click', handleChatSubmit);
@@ -1153,9 +1176,8 @@
             if (e.key === 'Enter') handleChatSubmit();
         });
 
-        // Scroll Reveal Animatsiyalari
         const revealElements = document.querySelectorAll('.reveal');
-        const revealCallback = (entries, observer) => {
+        const revealCallback = (entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
